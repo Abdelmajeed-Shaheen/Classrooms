@@ -140,7 +140,7 @@ class CreateClassroomTestCase(TestCase):
         data = {
             "subject":"Science",
             "grade":5,
-            "year":"2018"
+            "year":2018
         }
         url = reverse("classroom-create")
         response = self.client.post(url, data)
@@ -254,7 +254,7 @@ class StudentCreateTestCase(TestCase):
             teacher= cls.user,
             subject="Science",
             grade=5,
-            year="2018",
+            year=2018,
             )
 
     def test_create(self):
@@ -264,7 +264,7 @@ class StudentCreateTestCase(TestCase):
             "name":"Laila",
             "dob":"1995-01-02",
             "exam_grade":100,
-            "gender":"F"
+            "gender":"Female"
         }
         response = self.client.post(url, data)
         self.assertEqual(response.status_code ,302)
@@ -289,7 +289,7 @@ class StudentUpdateTestCase(TestCase):
             teacher= cls.user,
             subject="Science",
             grade=5,
-            year="2018",
+            year=2018,
             )
         cls.students = []
         for i in range(0,5):
@@ -299,7 +299,7 @@ class StudentUpdateTestCase(TestCase):
                     dob="1995-01-02",
                     exam_grade=100,
                     classroom=cls.classroom,
-                    gender="F"
+                    gender="Female"
                 )
             )
 
@@ -317,8 +317,8 @@ class StudentUpdateTestCase(TestCase):
         data = {
             "name":"Laila",
             "dob":"1995-01-02",
-            "exam_grade":10,
-            "gender":"F"
+            "exam_grade":100,
+            "gender":"Female"
         }
         response = self.client.post(url, data)
         student = Student.objects.get(id=self.students[0].id)
@@ -360,4 +360,3 @@ class StudentDeleteTestCase(TestCase):
         url = reverse("student-delete", kwargs={"classroom_id": 1, "student_id": student.id})
         response = self.client.get(url)
         self.assertEqual(response.status_code, 302)
-
